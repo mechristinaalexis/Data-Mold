@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DataMold Dashboard</title>
+    <link rel="stylesheet" href="/style/user-dashboard.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"></script>
+  </head>
+  <body>
+    <nav class="sidebar">
+      <div class="sidebar-header">
+        <div class="nav-brand">DataMold</div>
+      </div>
+      <div class="nav-links">
+        <a href="/user/dashboard/home" class="nav-link">
+          <i class="fa-solid fa-house"></i>
+          <span>
+            HOME
+          </span>
+        </a>
+        <a href="/user/dashboard/modern-data-types" class="nav-link">
+          <i class="fa-solid fa-database"></i>
+          <span>
+            MODERN DATA TYPES
+          </span>
+        </a>
+        <a href="/user/dashboard/view-projects" class="nav-link">
+          <i class="fa-solid fa-folder"></i>
+          <span>
+            VIEW PROJECTS
+          </span>
+        </a>
+        <a href="/user/dashboard/how-to-use" class="nav-link">
+          <i class="fa-solid fa-pen-to-square"></i>
+          <span>
+            HOW TO USE
+          </span>
+        </a>
+      </div>
+    </nav>
+
+    <main class="content">
+      <section id="home" class="content-section hidden">
+        <h1>Welcome to DataMold</h1>
+        <p>Your data management dashboard</p>
+
+
+
+        <div class="stats-grid">
+          <div class="stat-card">
+              <div class="stat-header">
+                  <i class="fas fa-database stat-icon"></i>
+                  <h3 class="stat-title">Active Databases</h3>
+              </div>
+              <p class="stat-value">12</p>
+          </div>
+
+
+          <div class="stat-card">
+              <div class="stat-header">
+                  <i class="fas fa-table stat-icon"></i>
+                  <h3 class="stat-title">Managed Tables</h3>
+              </div>
+              <p class="stat-value">384</p>
+          </div>
+
+
+          <div class="stat-card">
+              <div class="stat-header">
+                  <i class="fas fa-hdd stat-icon"></i>
+                  <h3 class="stat-title">Total Storage</h3>
+              </div>
+              <p class="stat-value">256<span class="highlight"> GB</span></p>
+          </div>
+
+
+          <div class="stat-card">
+              <div class="stat-header">
+                  <i class="fas fa-plug stat-icon"></i>
+                  <h3 class="stat-title">Active Connections</h3>
+              </div>
+              <p class="stat-value">24</p>
+          </div>
+      </div>
+
+
+
+        <div class="analytics-container">
+            <div class="chart-card">
+                <h3>Storage Distribution</h3>
+                <canvas id="storageChart"></canvas>
+            </div>
+
+
+            <div class="activity-feed">
+                <h3>Recent Activity</h3>
+                <div class="activity-item">
+                    <i class="fas fa-table activity-icon text-success"></i>
+                    <div>
+                        <div>New table created</div>
+                        <small>2 minutes ago</small>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <i class="fas fa-database activity-icon text-warning"></i>
+                    <div>
+                        <div>Database backup completed</div>
+                        <small>1 hour ago</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="resource-meter">
+            <div class="meter-label">
+                <span>Storage Usage</span>
+                <span>65% Used</span>
+            </div>
+            <div class="meter-bar">
+                <div class="meter-progress"></div>
+            </div>
+        </div>
+
+      
+      </section>
+
+
+      <section id="modern-data-types" class="content-section hidden">
+        <h1>Modern Data Types</h1>
+        <div class="table-container">
+          <table>
+              <thead>
+                  <tr>
+                      <th>Data Types</th>
+                      <th>Description</th>
+                      <th>Methods</th>
+                  </tr>
+              </thead>
+              <tbody id="data-types-table">
+                  
+              </tbody>
+          </table>
+      </div>
+      </section>
+
+
+      <section id="view-projects" class="content-section hidden">
+        <div class="projects-container">
+          <div class="projects-header">
+            <h1>Projects Overview</h1>
+              <button class="create-btn">CREATE</button>
+          </div>
+          
+          <div class="projects-grid">
+              <!-- Project Card (example) -->
+              <!-- <div class="project-card">
+                  <div class="project-content">
+                      <h3>Untitled</h3>
+                  </div>
+              </div>
+
+              <div class="project-card">
+                <div class="project-content">
+                    <h3>Untitled</h3>
+                </div>
+            </div>
+
+            <div class="project-card">
+              <div class="project-content">
+                  <h3>Untitled</h3>
+              </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-content">
+                <h3>Untitled</h3>
+            </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-content">
+              <h3>Untitled</h3>
+          </div>
+      </div> -->
+              
+              <!-- Add more project cards here -->
+          </div>
+      </div>
+      </section>
+
+      <!-- How to Use -->
+      <section id="how-to-use" class="content-section hidden">
+        <h1>Documentation</h1>
+        <p>Usage instructions go here...</p>
+      </section>
+
+
+
+
+      <section id="create-database" class="content-section hidden">
+
+        <h2>Create a Project</h2>
+        <div class="form-container">
+            <h2 class="text-center">Create Database</h2>
+            <form id="database-form"> 
+                <div class="form-group">
+                    <label for="db-name">Database Name</label>
+                    <input type="text" id="db-name" required>
+                </div>
+                
+                <div class="form-group">
+                    <labelid  for="username">Username</label>
+                    <input type="text" id="username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required>
+                </div>
+                
+                <button type="submit" class="submit-btn">Create Database</button>
+            </form>
+        </div>
+    </section>
+
+    <section id="json-coverters" class="content-section hidden">
+      <!-- <div class="converter-options">
+          <div class="converter-card" onclick="handleConversion('form')">
+              <h3>JSON to Form</h3>
+              <p>Database: MyDatabase</p>
+
+          </div>
+          <div class="converter-card" onclick="handleConversion('table')">
+              <h3>JSON to Table</h3>
+              <p>Database: MyDatabase</p>
+          </div>
+          <div class="converter-card" onclick="handleConversion('mysql')">
+              <h3>JSON to MySQL</h3>
+              <p>Database: MyDatabase</p>
+          </div>
+          <div class="converter-card" onclick="handleConversion('mermaid')">
+              <h3>JSON to Mermaid</h3>
+              <p>Database: MyDatabase</p>
+          </div>
+          <div class="converter-card" onclick="handleConversion('ai')">
+              <h3>Create using AI</h3>
+              <p>Database: MyDatabase</p>
+          </div>
+      </div> -->
+  </section>
+
+
+
+
+
+    <section id="json-to-form" class="content-section hidden">
+      <div class="json-form-container">
+        <h2 style="margin-bottom: 30px;">JSON TO FORM</h2>
+        <div id="json-form-editor" class="editor">{
+          "formTitle": "Sign In",
+          "fields": [
+            { "type": "email", "name": "email", "placeholder": "Enter your email", "label": "Email" },
+            { "type": "distance", "name": "distance", "placeholder": "Enter distance (e.g., 10 km)", "label": "Distance" }
+          ]
+        }
+        
+        </div>
+  
+      <div id="error-message"></div>
+        <br>
+        <button class="create-form-btn">Create Form</button>
+      </div>
+      <div id="formContainer"></div>
+    </section>
+
+
+
+
+
+
+
+
+    <section id="json-to-mysql" class="content-section hidden">
+      <div class="json-form-container">
+        <h2 style="margin-bottom: 30px;">JSON TO MYSQL</h2>
+        <div id="json-table-container" class="editor">
+          {
+            "tableName": "SignUp",
+            "columns": [
+              { "column": "name", "type": "COUNTRY" },
+              { "column": "number", "type": "PHONE_NUMBER" }
+            ]
+          }          
+      </div>
+  
+      <div id="error-message"></div>
+        <br>
+        <button class="create-table-btn">Create Form</button>
+      </div>
+      <div id="tableContainer"></div>
+      <h2 style="margin-top: 20px;">Manage Database Table Data</h2>
+      <div id="form-action-container">
+        <button class="table-action-btn add-column">add column</button>
+        <button class="table-action-btn update-column">update column</button>
+        <button class="table-action-btn delete-column">delete column</button>
+        <button class="table-action-btn show-column">show column</button>
+        <button class="table-action-btn add-row">add row</button>
+        <button class="table-action-btn delete-row">delete row</button>
+        <button class="table-action-btn delete-all-rows">delete all rows</button>
+        <button class="table-action-btn add-relation">add relation</button>
+        <button class="table-action-btn delete-relation">delete relation</button>
+        <button class="table-action-btn join-tables">join tables</button>
+        <button class="table-action-btn show-table">show table</button>
+        <button class="table-action-btn delete-table">delete table</button>
+      </div>
+    </section>
+
+    <section id="json-to-mermaid" class="content-section hidden">
+      <div class="json-form-container">
+        <h2 style="margin-bottom: 30px;">JSON TO MERMAID DIAGRAM</h2>
+        <div class="editor">{
+          "name": "John Doe",
+          "age": 25,
+          "city": "New York"
+      }</div>
+        <br>
+        <button class="create-form-btn">Create Form</button>
+      </div>
+    </section>
+
+    <section id="json-to-ai" class="content-section hidden">
+      <div class="json-form-container">
+        <textarea 
+          id="json-input" 
+          placeholder="Enter JSON schema here..."
+          rows="10"
+          cols="50"
+        ></textarea>
+        <br>
+        <button class="create-form-btn">Create Form</button>   // onclick="createForm()"
+      </div>
+    </section>
+
+    </main>
+
+    <div id="table-curd-form-container"></div>
+
+
+    <!-- <form-component2></form-component2> -->
+
+
+
+
+    <script type="module" src="/script/form-main.js"></script>
+    <script type="module" src="/script/table-creation.js"></script>
+    <!-- <script type="module" src="/script/form-demo.js"></script> -->
+    <script type="module" src="/components/formComponent.js"></script>
+
+    <script src="/script/user-dashboard3.js"></script>
+    <script src="/script/table-manage/add-column.js"></script>
+    <script
+      src="https://kit.fontawesome.com/ab3b39e762.js"
+      crossorigin="anonymous">
+    </script>
+
+  </body>
+  
+
+</html>
